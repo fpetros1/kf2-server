@@ -2,8 +2,9 @@
 
 KF2_SERVER_ROOT="/kf2-server"
 KF_EXEC_PATH="${KF2_SERVER_ROOT}/Binaries/Win64/KFGameSteamServer.bin.x86_64"
+KF_WEB_PATH="${KF2_SERVER_ROOT}/KFGame/Config/KFWeb.ini"
 START_SERVER_EXEC_PATH="${KF2_SERVER_ROOT}/start_server"
-PID_FILE_PATH="${KF2_SERVER_ROOT}/pid"
+TIMEOUT_LENGTH=20
 
 function install_or_update_kf2_server() {
 
@@ -11,12 +12,7 @@ function install_or_update_kf2_server() {
 
 }
 
-function prepare_server() {
-
-
-   if [ ! -z "${KF_WEBADMIN}" ]; then
-      sed -i "s/^bEnabled=.*/bEnabled=${KF_WEBADMIN}\r/" "${KF2_SERVER_ROOT}/KFGame/Config/KFWeb.ini"
-   fi
+function prepare_server_executable() {
 
    if [ -z "${KF_MAP}" ]; then
        KF_MAP=KF-BurningParis
@@ -70,30 +66,25 @@ function prepare_server() {
       SERVER_STRING+=" -ConfigSubDir=${KF_PREFERRED_PROCESSOR}"
    fi
 
-   echo "${KF_EXEC_PATH} ${SERVER_STRING} &" > "${START_SERVER_EXEC_PATH}"
-   echo "echo \$! > ${PID_FILE_PATH}" | tee -a "${START_SERVER_EXEC_PATH}"
-
+   echo "${KF_EXEC_PATH} ${SERVER_STRING}" > "${START_SERVER_EXEC_PATH}"
    chmod +x "${START_SERVER_EXEC_PATH}"
 
 }
 
-function start_server() {
-
-   if [[ -f "${PID_FILE_PATH}" ]]; then
-     pid="$(cat ${PID_FILE_PATH})"
-     kill -9 $pid
-     echo "Killing existing server to start a new one..."
-     rm -f "${PID_FILE_PATH}"
-   fi
-
-   bash "${START_SERVER_EXEC_PATH}"
-}
-
 function ensure_create_configs() {
-   if [[ ! -f "${KF2_SERVER_ROOT}/KFGame/Config/KFWeb.ini" ]]; then
+   if [[ ! -f "${KF_WEB_PATH}" ]]; then
      echo "Running server to create config files..."
-     start_server
-     sleep 20
+     timeout -k $TIMEOUT_LENGTH $TIMEOUT_LENGTH "${START_SERVER_EXEC_PATH}" > /dev/null 2>&1
+     echo "Killing server, config files created"
    fi
 }
 
+function apply_configs() {
+   if [ ! -z "${KF_WEBADMIN}" ]; then
+      sed -i "s/^bEnabled=.*/bEnabled=${KF_WEBADMIN}\r/" "${KF_WEB_PATH}"
+   fi
+}
+
+function start_server() {
+   "${START_SERVER_EXEC_PATH}"
+}

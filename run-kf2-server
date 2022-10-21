@@ -5,6 +5,7 @@ set -o xtrace
 source scripts/functions.sh
 
 install_or_update_kf2_server
-prepare_server
+prepare_server_executable
 ensure_create_configs
+apply_configs
 start_server
