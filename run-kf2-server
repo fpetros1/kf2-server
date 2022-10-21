@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -o xtrace
+
+source scripts/functions.sh
+
+install_or_update_kf2_server
+prepare_server
+ensure_create_configs
+start_server

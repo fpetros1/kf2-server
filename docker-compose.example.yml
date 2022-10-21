@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  vanilla-0:
+    image: fpetros/kf2-server:latest
+    ports:
+      - '7777:7777/udp'
+      - '27015:27015/udp'
+      - '8080:8080/tcp'
+      - '20560:20560/tcp'
+    restart: unless-stopped
+    environment:
+      - KF_WEBADMIN=True # True or False, activate WebAdmin
+      - KF_ADMIN=Admin # Username to log in into WebAdmin
+      - KF_ADMIN_PASSWORD=admin123123 # Password to log in into WebAdmin
+      - KF_GAME_PASSWORD=123123 # Game Password, delete/leave blank for public game
+      - KF_PORT=7777 # Game Port, default: 7777
+      - KF_QUERY_PORT=27015 # Steam Query Port, default: 27015
+      - KF_WEBADMIN_PORT=8080 # WebAdmin Port, default: 8080
+    volumes:
+      - kf2server:/kf2server
+    tty: true
+    stdin_open: true
+volumes:
+  kf2server:
