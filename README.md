@@ -33,14 +33,19 @@ services:
       - KF_QUERY_PORT=27015
       - KF_WEBADMIN_PORT=8080
     volumes:
-      - kf2server:/kf2server
+      - kf2-server:/kf2-server/steam-server
     tty: true
     stdin_open: true
 volumes:
-  kf2server:
+  kf2-server:
 ```
 
 ## Environment Variables
+
+## Customization
+| Variable         | Description                | Possible Values               | Default       |
+|------------------|----------------------------|-------------------------------|---------------|
+| ```KF_MODS```    | Mod Id List(Steam Workshop), separated by ',' [How to get Workshop ID](#how-to-get-workshop-id) | 123123,123124,1231235,123456,1234567,123458 |    |
 
 ## Arguments
 | Variable         | Description                | Possible Values               | Default       |
@@ -62,7 +67,5 @@ volumes:
 | ```KF_PREFERRED_PROCESSOR```| This will tie a server process to a single core/thread on the hosting machine.  | ``` Any integer Number ``` ||
 | ```KF_CONFIG_SUB_DIR```| Creates and reads settings from a sub directory under ./KFGame/Config which allows you to configure .INI settings on a per server basis. | ``` Any Alpha numeric character combinations ``` ||
 
-## Customization
-| Variable         | Description                | Possible Values               | Default       |
-|------------------|----------------------------|-------------------------------|---------------|
-| ```KF_MODS```    | Mod Id List(Steam Workshop), separated by ',' | 123123,123124,1231235 |    |
+# How to get Workshop ID
+![How to get](https://raw.githubusercontent.com/fpetros1/kf2-server/main/resources/how-to-get-workshop-id.png)
