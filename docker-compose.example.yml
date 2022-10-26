@@ -23,4 +23,4 @@ services:
     tty: true
     stdin_open: true
 volumes:
-  kf2server:
+  kf2-server:
