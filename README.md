@@ -32,6 +32,7 @@ services:
       - KF_PORT=7777
       - KF_QUERY_PORT=27015
       - KF_WEBADMIN_PORT=8080
+      - KF_MODS=123123,123124,123125
     volumes:
       - kf2-server:/kf2-server/steam-server
     tty: true
