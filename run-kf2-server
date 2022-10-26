@@ -2,10 +2,13 @@
 
 set -o xtrace
 
-source scripts/functions.sh
+source /kf2-server/scripts/functions.sh
 
 install_or_update_kf2_server
 prepare_server_executable
 ensure_create_configs
+fix_steam_libraries
+install_mods
+add_custom_maps_selector
 apply_configs
 start_server

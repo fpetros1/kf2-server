@@ -16,9 +16,10 @@ services:
       - KF_GAME_PASSWORD=123123 # Game Password, delete/leave blank for public game
       - KF_PORT=7777 # Game Port, default: 7777
       - KF_QUERY_PORT=27015 # Steam Query Port, default: 27015
-      - KF_WEBADMIN_PORT=8080 # WebAdmin Port, default: 8080
+      - KF_WEBADMIN_PORT=8080 # WebAdmin Port, default: 8080A
+      - KF_MODS=123123,123124,123125 # Mod Id List(Workshop), separated by ','
     volumes:
-      - kf2server:/kf2server
+      - kf2-server:/kf2-server/steam-server
     tty: true
     stdin_open: true
 volumes:

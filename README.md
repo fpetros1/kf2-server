@@ -54,10 +54,15 @@ volumes:
 
 ## Switches
 | Variable         | Description                | Possible Values               | Default       |
--------------------|----------------------------|-------------------------------|---------------|
+|------------------|----------------------------|-------------------------------|---------------|
 | ```KF_PORT```| Game Port | ``` Any integer Number ``` | ``` 7777 ``` |
 | ```KF_QUERY_PORT```| Steam Query Port | ``` Any integer Number ``` | ``` 27015 ``` |
 | ```KF_WEBADMIN_PORT```| Port that WebAdmin will be acessible | ``` Any integer Number ``` | ``` 27015 ``` |
 | ```KF_MULTIHOME```| If a server machine can resolve to multiple IP's, this command can tie a server to a specific IP on that machine.  | ``` Server IP Adress ``` ||
 | ```KF_PREFERRED_PROCESSOR```| This will tie a server process to a single core/thread on the hosting machine.  | ``` Any integer Number ``` ||
 | ```KF_CONFIG_SUB_DIR```| Creates and reads settings from a sub directory under ./KFGame/Config which allows you to configure .INI settings on a per server basis. | ``` Any Alpha numeric character combinations ``` ||
+
+## Customization
+| Variable         | Description                | Possible Values               | Default       |
+|------------------|----------------------------|-------------------------------|---------------|
+| ```KF_MODS```    | Mod Id List(Steam Workshop), separated by ',' | 123123,123124,1231235 |    |
